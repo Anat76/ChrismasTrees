@@ -7,26 +7,20 @@ const sapinsData = require("./sapinsData.json");
 
 app.get("/", (req, res) => {
   //   console.log(req.query.arrdt);
-  const arrdtReq = req.query.arrdt;
-  const findArrdt = sapinsData.find(
-    (element) => element.fields.arrdt === arrdtReq
+  const arrdtReq = Number(req.query.arrdt);
+  const findArrdt = sapinsData.filter(
+    (sapinsData) => sapinsData.fields.arrdt === arrdtReq
   );
-  console.log(findArrdt);
-  res.status(200).json(
-    // sapinsData.map(({ fields }) => {
-    //   //   console.log(fields);
+  //   console.log(findArrdt);
 
-    //   return {
-    //     garden: fields.jardin,
-    //     adress: fields.adresse,
-    //     arrdt: fields.arrdt,
-    //   };
-    // })
-    {
-      //   garden: fields.jardin,
-      //   adress: fields.adresse,
-      //   arrdt: fields.arrdt,
-    }
+  res.status(200).json(
+    findArrdt.map(({ fields }) => {
+      return {
+        garden: fields.jardin,
+        adress: fields.adresse,
+        arrdt: fields.arrdt,
+      };
+    })
   );
 });
 
